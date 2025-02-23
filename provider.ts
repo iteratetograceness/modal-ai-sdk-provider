@@ -10,7 +10,7 @@ import {
 export interface ModalWebEndpointProviderSettings {
   /**
 API token that is being send using the `Authorization` header.
-It defaults to the `MODAL_WEB_ENDPOINT_API_KEY` environment variable.
+It defaults to the `MODAL_AUTH_TOKEN` environment variable.
    */
   apiToken?: string
 
@@ -69,8 +69,8 @@ export function createModalWebEndpoint(
       headers: {
         Authorization: `Bearer ${loadApiKey({
           apiKey: options.apiToken,
-          environmentVariableName: 'MODAL_WEB_ENDPOINT_API_KEY',
-          description: 'Modal Web Endpoint API Key',
+          environmentVariableName: 'MODAL_AUTH_TOKEN',
+          description: 'Modal Auth Token',
         })}`,
         ...options.headers,
       },

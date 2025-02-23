@@ -60,7 +60,7 @@ export class ModalWebEndpointImageModel implements ImageModelV1 {
       value: { images },
       responseHeaders,
     } = await postJsonToApi({
-      url: this.config.baseURL,
+      url: `${this.config.baseURL}/v1/pixel`,
 
       headers: combineHeaders(await resolve(this.config.headers), headers, {
         prefer: 'wait',
@@ -71,9 +71,9 @@ export class ModalWebEndpointImageModel implements ImageModelV1 {
           prompt,
           seed,
           num_outputs: n,
+          style: modelId,
           ...(providerOptions.modalWebEndpoint ?? {}),
         },
-        model: modelId,
       },
 
       successfulResponseHandler: createJsonResponseHandler(
@@ -97,5 +97,5 @@ export class ModalWebEndpointImageModel implements ImageModelV1 {
 }
 
 const modalWebEndpointImageResponseSchema = z.object({
-  images: z.array(z.instanceof(Buffer)),
+  images: z.array(z.string()),
 })
